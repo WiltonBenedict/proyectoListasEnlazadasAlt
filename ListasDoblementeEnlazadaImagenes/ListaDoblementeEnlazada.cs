@@ -25,7 +25,7 @@ namespace ListasDoblementeEnlazadaImagenes
             actual = null;
         }
 
-        // Agregar una imagen al final de la lista
+        // Agrega una imagen al final de la lista
         public void AgregarImagen(string ruta)
         {
             NodoImagen nuevoNodo = new NodoImagen(ruta);
@@ -39,18 +39,18 @@ namespace ListasDoblementeEnlazadaImagenes
             }
 
             // 
-            Cola.Siguiente = nuevoNodo;
-            nuevoNodo.Anterior = Cola;
-            Cola = nuevoNodo;
+            Cola.Siguiente = nuevoNodo; // 1. El último actual apunta al nuevo
+            nuevoNodo.Anterior = Cola; // 2. El nuevo apunta de vuelta al último actual
+            Cola = nuevoNodo;  // 3. El nuevo pasa a ser la Cola
         }
 
         // Avanza al siguiente nodo y devuelve su imagen
         public Image ObtenerSiguienteImagen()
         {
-            if (actual == null) return null;
+            if (actual == null) return null; // Lista vacía: no hay nada que mostrar.
 
             if (actual.Siguiente != null)
-                actual = actual.Siguiente;
+                actual = actual.Siguiente; // Avanza solo si hay un siguiente nodo.
 
             return actual.Imagen;
         }
@@ -58,17 +58,17 @@ namespace ListasDoblementeEnlazadaImagenes
         // retrocede al nodo anterior y devuelve su imagen
         public Image ObtenerImagenAnterior()
         {
-            if (actual == null) return null;
+            if (actual == null) return null; // Lista vacía: no hay nada que mostrar.
 
             if (actual.Anterior != null)
-                actual = actual.Anterior;
+                actual = actual.Anterior;// Avanza solo si hay un anterior nodo.
 
             return actual.Imagen;
         }
 
         public Image ObtenerImagenActual()
         {
-            return actual?.Imagen;
+            return actual?.Imagen;  //Si actual es null, devuelve null. De lo contrario, devuelve la imagen actual.
         }
 
         public void Reiniciar()
